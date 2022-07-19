@@ -1,20 +1,25 @@
-<script setup>
-defineProps({
-  msg2: {
-    type: String,
-    required: true
-  }
-})
-</script>
 
 <template>
-    <div class="thehome">
-       <h1>{{ msg2 }}</h1>
+    <div id="app-2">
+       <h1>{{ content.data.title }}</h1>
+       <span>{{ content.data.paragraph }}</span>
     </div>
 </template>
 
+<script setup>
+var content = {
+el: '#app-2',
+    data: {
+        title: 'titre de test',
+        paragraph: 'donnée de test contenu',
+        }
+        }
+</script>
+
+
 <style scoped>
-.thehome h1 {
+#app-2 {
+  padding-top: 20px;
   text-align: center;
   color:whitesmoke;
 }

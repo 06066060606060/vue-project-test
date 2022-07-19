@@ -8,13 +8,13 @@ import ContentHome from './components/ContentHome.vue'
     <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+      <HelloWorld/>
     </div>
   </header>
 
   <main>
     <div class="home">
-    <ContentHome msg2="ok test" />
+    <content-home> {{ title }}</content-home>
     </div>
   </main>
 </template>
