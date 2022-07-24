@@ -1,26 +1,45 @@
-
-<template>
-    <div id="app-2">
-       <h1>{{ content.data.title }}</h1>
-       <span>{{ content.data.paragraph }}</span>
-    </div>
-</template>
-
-<script setup>
-var content = {
-el: '#app-2',
-    data: {
-        title: 'titre de test',
-        paragraph: 'donnée de test contenu',
-        }
-        }
+<script>
+export default {
+  data() {
+    return {
+      todoId: 1,
+      tickerId: 'BTCUSDT',
+      todoData: null
+    }
+  },
+  methods: {
+    async fetchData() {
+      this.todoData = null
+      const res = await fetch(
+        `https://api.binance.com/api/v3/ticker/price?symbol=${this.tickerId}`
+      )
+      this.todoData = await res.json()
+    }
+  },
+  mounted() {
+    this.fetchData()
+  },
+  watch: {
+    todoId() {
+      this.fetchData()
+    }
+  }
+}
 </script>
 
+<template>
+  <button @click="todoId++">Récuperer Prix</button><br>
+  <input type="text" class="symbol" placeholder="BTCUSDT" v-model="tickerId">
+  <p v-if="!todoData">Loading...</p>
+  <pre v-else>
+  <h1>{{ todoData.symbol }}</h1>
+  <h2>{{ todoData.price }}</h2>
+  </pre>
 
-<style scoped>
-#app-2 {
-  padding-top: 20px;
-  text-align: center;
-  color:whitesmoke;
+</template>
+
+<style lang="scss">
+.symbol {
+  margin-top: 20px;
 }
 </style>
